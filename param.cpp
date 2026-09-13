@@ -81,7 +81,7 @@ void Param::printParams() {
 			 << argumentVector[i] 
 			 << "]" 
 			 << endl;
-}
+};
 
 #endif
 

@@ -1,4 +1,4 @@
-mifndef _PARAM_HPP
+#ifndef _PARAM_HPP
 #define _PARAM_HPP
 /* Don't test program with more than this many tokens for input */
 #define MAXARGS 32

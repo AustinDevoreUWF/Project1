@@ -1,5 +1,5 @@
-#include "parse.h"
-#include "Param.h"
+#include "parse.hpp"
+#include "param.hpp"
 #include "cstdio"
 #include <cstring>
 
@@ -10,7 +10,7 @@ void parse(char* line){
     while(token != nullptr){
         addArgument(token);
         
-        token = strtok(input, " \n\t");
+        token = strtok(line, " \n\t");
     }
 }
 
