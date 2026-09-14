@@ -3,19 +3,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <string.h>
 
-int main(){
+
+int main(int argc, char* argv[]){
     char* line = nullptr;
     size_t size = 0;
-    Param p{};
 
 while(true){
-  printf("Test Output");
-  
+  printf("myshell> ");
   getline(&line, &size, stdin);
+  Param p{};
   //line represents the user chars, &line give us adress of line
   // adress of line is needed to point to it with strtok.
   parse(line,p);
- }
+  if(argc > 1 && (strcmp(argv[1],"-Debug") ==0)||(strcmp(argv[1],"-debug")==0)){
+    p.printParams();
+  }    
+}
  return 0;
 }

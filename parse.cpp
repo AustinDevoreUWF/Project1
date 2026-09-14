@@ -17,6 +17,8 @@ void parse(char* line, Param& p){
             p.setBackground(1);
         }else{
             p.addArgument(token);
+        }{
+
         }
         token = nextToken;
     }
