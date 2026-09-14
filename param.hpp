@@ -45,19 +45,36 @@ char** getArguments();
 filename
 */
 void setInputRedirect(char *newInputRedirect);
-// finish documentation
+/**
+* Sets the filename for output redirection.
+*
+* @param newOutputRedirect a string specifying the output redirect
+filename
+*/
 void setOutputRedirect(char *newOutputRedirect);
-// finish documentation
-void setBackground(int newBackground);
+/**
+* Sets whether or not the command should be executed in the background.
+*
+* @param newBackground 1 if the command should execute in the 
+background (true), or 0 if it should not execute in the background (false)
+*/void setBackground(int newBackground);
 /**
 * Returns the filename for input redirection.
 *
 * @return a string representing a filename
 */
 char* getInputRedirect();
-// finish documentation
+/**
+* Returns the filename for output redirection.
+*
+* @return a string representing a filename
+*/
 char* getOutputRedirect();
-// finish documentation
+/**
+* Returns whether or not the command should execute in the background.
+*
+* @return 1 if executed in the background, 0 if it's not
+*/
 int getBackground();
 /**
 * Prints the information in the specified structure to standard out.
