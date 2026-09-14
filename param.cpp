@@ -56,11 +56,11 @@ int Param::getBackground()
 
 void Param::printParams() {
 	cout << "InputRedirect: [" 
-	     << (inputRedirect != NULL) ? inputRedirect : "NULL";
+	     << (inputRedirect != NULL ? inputRedirect : "NULL");
 	cout << "]" 
 	     << endl 
 		 <<	"OutputRedirect: [" 
-		 << (outputRedirect != NULL) ? outputRedirect : "NULL";
+		 << (outputRedirect != NULL ? outputRedirect : "NULL");
 	cout << "]" 
 	     << endl 
 		 << "Background: [" 
