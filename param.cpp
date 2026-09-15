@@ -22,6 +22,10 @@ char** Param::getArguments()
 	return argumentVector;
 }
 
+int Param::getArgumentCount(){
+	return argumentCount;
+}
+
 void Param::setInputRedirect(char *newInputRedirect)
 {
 	inputRedirect = newInputRedirect;

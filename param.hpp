@@ -44,6 +44,8 @@ char** getArguments();
 * @param newInputRedirect a string specifying the input redirect
 filename
 */
+int getArgumentCount();
+
 void setInputRedirect(char *newInputRedirect);
 /**
 * Sets the filename for output redirection.

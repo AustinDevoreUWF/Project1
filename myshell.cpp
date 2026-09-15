@@ -18,8 +18,9 @@ while(true){
   // adress of line is needed to point to it with strtok.
   parse(line,p);
   char** arguments = p.getArguments();
+  int arguments = p.getArgumentCount();
 
-  if(strcmp(arguments[0],"exit")==0)break;
+  if(arguments > 0 && strcmp(arguments[0],"exit")==0)break;
   
   if(argc > 1 && (strcmp(argv[1],"-Debug") ==0 || strcmp(argv[1],"-debug")==0)){
     p.printParams();
