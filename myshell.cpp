@@ -16,11 +16,12 @@ while(true){
   Param p{};
   //line represents the user chars, &line give us adress of line
   // adress of line is needed to point to it with strtok.
-  parse(line,p);
+  if(!parse(line,p))
+    continue;
   char** arguments = p.getArguments();
-  int arguments = p.getArgumentCount();
+  int argumentCount = p.getArgumentCount();
 
-  if(arguments > 0 && strcmp(arguments[0],"exit")==0)break;
+  if(argumentCount > 0 && strcmp(arguments[0],"exit")==0)break;
   
   if(argc > 1 && (strcmp(argv[1],"-Debug") ==0 || strcmp(argv[1],"-debug")==0)){
     p.printParams();
