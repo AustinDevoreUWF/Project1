@@ -9,12 +9,23 @@ Param::Param()
 	inputRedirect = outputRedirect = NULL;
 	background = 0;
 	argumentCount = 0;
+	argumentVector[0] = NULL;
 }
 //work on getting the token into the argument vector
-void Param::addArgument (char* newArgument)
+void Param::addArgument(char *newArgument)
 {
-	argumentVector[argumentCount] = newArgument;	
-	argumentCount++;
+    if (newArgument == NULL)
+        return;
+
+    if (argumentCount >= MAXARGS - 1) {
+        cerr << "Error: too many arguments\n";
+        return;
+    }
+
+    argumentVector[argumentCount] = newArgument;
+    argumentCount++;
+
+    argumentVector[argumentCount] = NULL;
 }
 //return the arguments in the argumentVector
 char** Param::getArguments()
