@@ -53,7 +53,7 @@ while(true){
       perror("execvp error");
       exit(1);
     }
-  }else if(pid != 0){
+  }else if(pid > 0){
     //parent proccess
     if(p.getBackground() == 1){
         backgroundPids.push_back(pid);
