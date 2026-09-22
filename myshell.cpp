@@ -6,10 +6,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <vector>
 
 int main(int argc, char* argv[]){
     char* line = nullptr;
     size_t size = 0;
+    std::vector<pid_t> backgroundPids{};
 
 while(true){
   printf("myshell> ");
@@ -24,7 +26,13 @@ while(true){
   char** arguments = p.getArguments();
   int argumentCount = p.getArgumentCount();
 
-  if(argumentCount > 0 && strcmp(arguments[0],"exit")==0)break;
+  if(argumentCount > 0 && strcmp(arguments[0],"exit")==0){
+    for(int i=0;i<backgroundPids.size();i++){
+     int status{};
+     waitpid(backgroundPids[i], &status, 0);
+    }
+    break;
+  }
   if(argc > 1 && (strcmp(argv[1],"-Debug") ==0 || strcmp(argv[1],"-debug")==0)){
     p.printParams();
     }
@@ -35,26 +43,27 @@ while(true){
     char* iDirect = p.getInputRedirect();
     char* oDirect = p.getOutputRedirect();
     if(iDirect != NULL){
-      FILE* ifp;
-      ifp = freopen(iDirect, "r", stdin);
+      freopen(iDirect, "r", stdin);
     }
     if(oDirect != NULL){
-      FILE* ofp;
-      ofp = freopen(oDirect, "w",stdout);
+      freopen(oDirect, "w",stdout);
     }
     //run execvp(argVectr[0],argVector) to run the new process
-    execvp(arguments[0],arguments);
+    if(execvp(arguments[0],arguments)== -1){;
+      perror("execvp error");
+      exit(1);
+    }
   }else if(pid != 0){
     //parent proccess
     if(p.getBackground() == 1){
-      //needs implenting
+        backgroundPids.push_back(pid);
     }else{
       int status{};
-      waitpid(pid,&status,0);
-      
+      waitpid(pid,&status,0); 
     }
+  }else{
+    perror("fork erro");
   }
-
-  }
+}
  return 0;
 }
