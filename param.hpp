@@ -1,3 +1,13 @@
+/**
+ * This file defines the Param class, which stores information about
+ * a parsed shell command, including its arguments, redirection files,
+ * and background execution status
+ *
+ * @author Austin Devore, Stephen Byrd
+ * @date 9/22/2026
+ * @info Course COP4634
+ */
+
 #ifndef _PARAM_HPP
 #define _PARAM_HPP
 /* Don't test program with more than this many tokens for input */
@@ -38,14 +48,15 @@ object.
 */
 char** getArguments();
 // getter & setter functions
+
+int getArgumentCount();
+
 /**
 * Sets the filename for input redirection.
 *
 * @param newInputRedirect a string specifying the input redirect
 filename
 */
-int getArgumentCount();
-
 void setInputRedirect(char *newInputRedirect);
 /**
 * Sets the filename for output redirection.
@@ -59,7 +70,8 @@ void setOutputRedirect(char *newOutputRedirect);
 *
 * @param newBackground 1 if the command should execute in the 
 background (true), or 0 if it should not execute in the background (false)
-*/void setBackground(int newBackground);
+*/
+void setBackground(int newBackground);
 /**
 * Returns the filename for input redirection.
 *
