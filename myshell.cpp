@@ -46,25 +46,29 @@ while(true){
 
   char** arguments = p.getArguments();
   int argumentCount = p.getArgumentCount();
-
-  /*
-   * If the first argument is "exit", all background processes
-   * must finish before terminating the shell
-   */
-  if(argumentCount > 0 && strcmp(arguments[0],"exit")==0){
-    for(int i=0;i<backgroundPids.size();i++){
-     int status{};
-     waitpid(backgroundPids[i], &status, 0);
-    }
-    break;
-  }
-  /*
+  if (argumentCount == 0) 
+    continue;
+  
+    /*
    * Print parsed command information when the user starts the
    * shell with either the -Debug or -debug command-line option
    */
   if(argc > 1 && (strcmp(argv[1],"-Debug") ==0 || strcmp(argv[1],"-debug")==0)){
     p.printParams();
     }
+
+    /*
+   * If the first argument is "exit", all background processes
+   * must finish before terminating the shell
+   */
+  
+  if(argumentCount > 0 && strcmp(arguments[0],"exit")==0){
+    for(size_t i = 0;i<backgroundPids.size();i++){
+     int status{};
+     waitpid(backgroundPids[i], &status, 0);
+    }
+    break;
+  }
 
   pid_t pid;
   pid = fork();
@@ -76,11 +80,17 @@ while(true){
     char* iDirect = p.getInputRedirect();
     char* oDirect = p.getOutputRedirect();
     if(iDirect != NULL){
-      freopen(iDirect, "r", stdin);
+      if(freopen(iDirect, "r", stdin) == NULL){
+        perror("freopen error");
+        exit(1);
+      }
     }
     if(oDirect != NULL){
-      freopen(oDirect, "w",stdout);
-    }
+      if(freopen(oDirect, "w", stdout) == NULL){
+        perror("freopen error");
+        exit(1);
+      }
+}
     //run execvp(argVectr[0],argVector) to run the new process
     if(execvp(arguments[0],arguments)== -1){;
       perror("execvp error");
